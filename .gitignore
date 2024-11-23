@@ -1,0 +1,13 @@
+# Byte-compiled files
+__pycache__/
+
+# Logs
+*.log
+logs/
+
+# Virtual environments
+myenv/
+venv/
+
+# API keys or credentials
+src/config.py

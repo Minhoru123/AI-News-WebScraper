@@ -41,3 +41,5 @@ Data Storage
 APIs
 
 - Many websites provide APIs for structured data access. Before scraping, check if the website offers an API, as this is often faster, more reliable, and compliant.
+
+## AI News WebScraper
