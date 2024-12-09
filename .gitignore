@@ -9,5 +9,8 @@ logs/
 myenv/
 venv/
 
-# API keys or credentials
-src/config.py
+# Database
+db.sqlite3
+ai_scraper.db
+ai_info_database.sqlite 
+ai_scraper.log

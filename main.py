@@ -2,6 +2,7 @@ import logging
 import schedule
 import time
 from config import Config
+from datetime import datetime
 from scrapers.arxiv_scraper import ArxivScraper
 from scrapers.news_scraper import NewsScraper
 from storage.database import AIInfoDatabase
@@ -52,6 +53,57 @@ def main():
     while True:
         schedule.run_pending()
         time.sleep(1)
+
+
+# Update main.py to use new database method
+def update_main_scrape_method():
+    """
+    Modify scraping methods to use new database insert
+    """
+
+    # For ArXiv scraper
+    def process_arxiv_paper(paper):
+        return {
+            'title': paper['title'],
+            'content': f"""
+# {paper['title']}
+
+**Authors:** {', '.join(paper['authors'])}
+
+## Abstract
+{paper['summary']}
+
+## Details
+- Link: {paper['link']}
+- Category: {paper['category']}
+""",
+            'source': 'ArXiv',
+            'source_link': paper['link'],
+            'content_type': 'research',
+            'tags': ['AI', paper['category']],
+            'published_date': paper.get('published_date', datetime.now().isoformat())
+        }
+
+    # For News scraper
+    def process_news_article(article):
+        return {
+            'title': article['title'],
+            'content': f"""
+# {article['title']}
+
+## Article Summary
+{article.get('summary', '')}
+
+## Full Details
+- Source: {article['source']}
+- Link: {article['link']}
+""",
+            'source': article['source'],
+            'source_link': article['link'],
+            'content_type': 'news',
+            'tags': ['AI', article['source']],
+            'published_date': datetime.now().isoformat()
+        }
 
 
 if __name__ == '__main__':
